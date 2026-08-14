@@ -15,7 +15,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build_files/environment.sh
+    /ctx/environment.sh
 
 ### Intégration de brew dans L'OCI (https://github.com/ublue-os/brew)
 ### On provisionne les fichiers d'installation de brew dans le rootfs de l'image bootc
@@ -32,21 +32,21 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build_files/softwares.sh
+    /ctx/softwares.sh
 
 ### améliorations des performances
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build_files/tweaks.sh
+    /ctx/tweaks.sh
 
 ### suppression des logiciels et services non souhaités (+ vidange finale de /ust/etc)
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build_files/trimming.sh && rm -rf /usr/etc
+    /ctx/trimming.sh && rm -rf /usr/etc
 
 ### LINTING
 ## Verify final image and contents are correct.
