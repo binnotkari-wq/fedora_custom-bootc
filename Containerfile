@@ -4,8 +4,8 @@ COPY build_files /
 COPY system_files /system_files
 
 # Base Image
-# FROM quay.io/fedora-ostree-desktops/silverblue:44
-FROM localhost/fedora_reference-bootc:latest
+FROM quay.io/fedora-ostree-desktops/silverblue:44
+# FROM localhost/fedora_reference-bootc:latest
 
 
 ### NB : /var/cache, /var/log et /tmp sont des montages provisoire pendant le build, ils sont donc hors de l'image qui reste donc sans résidus
