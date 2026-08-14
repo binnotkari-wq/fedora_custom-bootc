@@ -7,9 +7,6 @@ COPY system_files /system_files
 # FROM quay.io/fedora-ostree-desktops/silverblue:44
 FROM localhost/fedora_reference-bootc:latest
 
-### On provisionne les fichiers d'installation de brew dans le rootfs de l'image bootc
-COPY --from=ghcr.io/ublue-os/brew:latest /system_files /
-
 
 ### NB : /var/cache, /var/log et /tmp sont des montages provisoire pendant le build, ils sont donc hors de l'image qui reste donc sans résidus
 
@@ -20,7 +17,17 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build_files/environment.sh
 
-### installation des services de brew (universal blue), binaire de llama, repo flathub, rpm
+### Intégration de brew dans L'OCI (https://github.com/ublue-os/brew)
+### On provisionne les fichiers d'installation de brew dans le rootfs de l'image bootc
+# COPY --from=ghcr.io/ublue-os/brew:latest /system_files /
+### installation des services de brew (universal blue)
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/build_files/brew_(ublue).sh
+
+### installation des rpm, binaire de llama, repo flathub
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \

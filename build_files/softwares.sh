@@ -28,12 +28,6 @@ ldconfig
 rm -rf /tmp/llama-cpp.tar.gz /tmp/llama-cpp-extract
 
 
-### Activation des services d'installation et update de brew (provisionnés par universal blue)
-systemctl preset brew-setup.service
-systemctl preset brew-update.timer
-systemctl preset brew-upgrade.timer
-
-
 ### Logiciels CLI. weak_deps : on ne veut pas de paquets suggérés supplémentaires.
 dnf5 install -y --setopt=install_weak_deps=False \
   gnome-shell-extension-dash-to-panel \
@@ -50,6 +44,7 @@ dnf5 install -y --setopt=install_weak_deps=False \
   kiwix-tools \
   aria2 \
   yt-dlp \
+  ffmpeg-free \
   mc \
   btop \
   fd-find \
