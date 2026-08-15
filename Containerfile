@@ -7,46 +7,17 @@ COPY system_files /system_files
 FROM quay.io/fedora-ostree-desktops/silverblue:44
 # FROM localhost/fedora_reference-bootc:latest
 
-
-### NB : /var/cache, /var/log et /tmp sont des montages provisoire pendant le build, ils sont donc hors de l'image qui reste donc sans résidus
-
-### fichiers injectés dans /etc et /usr (configs, scripts, skels, services...)
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/environment.sh
-
 ### Intégration de brew dans L'OCI (https://github.com/ublue-os/brew)
 ### On provisionne les fichiers d'installation de brew dans le rootfs de l'image bootc
 # COPY --from=ghcr.io/ublue-os/brew:latest /system_files /
-### installation des services de brew (universal blue)
-# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-#     --mount=type=cache,dst=/var/cache \
-#     --mount=type=cache,dst=/var/log \
-#     --mount=type=tmpfs,dst=/tmp \
-#     /ctx/build_files/brew_(ublue).sh
 
-### installation des rpm, binaire de llama, repo flathub
+### NB : /var/cache, /var/log et /tmp sont des montages provisoire pendant le build, ils sont donc hors de l'image qui reste donc sans résidus. Vidange finale de /ust/etc.
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/softwares.sh
-
-### améliorations des performances
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/tweaks.sh
-
-### suppression des logiciels et services non souhaités (+ vidange finale de /ust/etc)
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/trimming.sh && rm -rf /usr/etc
+    /ctx/build.sh && rm -rf /usr/etc
 
 ### LINTING
 ## Verify final image and contents are correct.
