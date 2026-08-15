@@ -11,8 +11,9 @@ curl --retry 3 -Lo /etc/flatpak/remotes.d/flathub.flatpakrepo https://dl.flathub
 ### Donc on récupère les binaires standalone depuis github https://edu.chainguard.dev/open-source/sigstore/cosign/how-to-install-cosign/#installing-cosign-with-the-cosign-binary
 
 curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
-mv cosign-linux-amd64 /usr/local/bin/cosign
-
+# on le place dans /usr/bin et non /usr/local/bin qui n'existe dans dans l'OCI (n'existe qu'une fois que le système est installé)
+mv cosign-linux-amd64 /usr/bin/cosign
+sudo chmod +x /usr/bin/cosign
 
 ### llama-cpp-vulkan n'est pas disponibles dans les repos rpm et lamma-cpp (non vulkan) télécharge rocm (2go de dépendances).
 ### Donc on récupère les binaires standalone depuis github, uniquement llama-server et llama-cli (build Vulkan)
