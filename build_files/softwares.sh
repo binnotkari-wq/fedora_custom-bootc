@@ -7,6 +7,12 @@ set -ouex pipefail
 mkdir -p /etc/flatpak/remotes.d/
 curl --retry 3 -Lo /etc/flatpak/remotes.d/flathub.flatpakrepo https://dl.flathub.org/repo/flathub.flatpakrepo
 
+### cosign (signature pour la construction de containers via github action) n'est pas disponibles dans les repos rpm.
+### Donc on récupère les binaires standalone depuis github https://edu.chainguard.dev/open-source/sigstore/cosign/how-to-install-cosign/#installing-cosign-with-the-cosign-binary
+
+curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
+mv cosign-linux-amd64 /usr/local/bin/cosign
+
 
 ### llama-cpp-vulkan n'est pas disponibles dans les repos rpm et lamma-cpp (non vulkan) télécharge rocm (2go de dépendances).
 ### Donc on récupère les binaires standalone depuis github, uniquement llama-server et llama-cli (build Vulkan)
