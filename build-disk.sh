@@ -2,7 +2,8 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-OUTPUT_DIR="/cargo/local_cache/bootc/isos"
+PROJECT_NAME="$(basename "$PWD")"
+OUTPUT_DIR="/cargo/local_cache/bootc/localhost/isos/$PROJECT_NAME-$(date +%Y%m%d)"
 
 # S'assurer que le dossier de sortie existe
 mkdir -p "$OUTPUT_DIR"
@@ -21,7 +22,7 @@ sudo podman run \
   --config /config.toml \
   --rootfs btrfs \
   --use-librepo=True \
-  localhost/fedora_custom-bootc:latest
+  localhost/$PROJECT_NAME:latest
 
 # Ajuster les permissions du fichier de sortie à l'utilisateur courant (simule l'étape chown du YAML)
 sudo chown -R "$(id -u):$(id -g)" "$OUTPUT_DIR"

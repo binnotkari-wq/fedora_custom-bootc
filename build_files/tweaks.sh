@@ -5,8 +5,7 @@ set -ouex pipefail
 ### ntsync : chargement au boot
 echo "ntsync" > /etc/modules-load.d/ntsync.conf
 
-### earlyoom
-dnf5 install -y earlyoom
+### earlyoom (le paquet est installé dans softwares.sh)
 systemctl enable earlyoom
 
 ### swappiness agressif pour favoriser ZRAM avant le swap disque

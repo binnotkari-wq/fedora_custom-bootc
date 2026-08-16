@@ -4,8 +4,9 @@ COPY build_files /
 COPY system_files /system_files
 
 # Base Image
+# pdoman ira chercher cette image dans son stockage local si pas de connection réseau (et si elle est disponible dans son stockage local, récupérée grâce à sudo podman pull quay.io/fedora-ostree-desktops/silverblue:44)
 FROM quay.io/fedora-ostree-desktops/silverblue:44
-# FROM localhost/fedora_reference-bootc:latest
+
 
 ### Intégration de brew dans L'OCI (https://github.com/ublue-os/brew)
 ### On provisionne les fichiers d'installation de brew dans le rootfs de l'image bootc
