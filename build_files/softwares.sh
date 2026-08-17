@@ -71,6 +71,7 @@ PACKAGES=(
   shellcheck
   stress-ng
   tldr
+  tmux
   yt-dlp
   zenity
   zoxide
@@ -85,17 +86,3 @@ else
 fi
 
 rm -f /etc/yum.repos.d/cargo-local.repo
-
-
-# simulation sur un bootc silverblue 44 épuré : 
-# dnf5 install --downloadonly -y \
-# distrobox bat powertop lm_sensors stress-ng s-tui libva-utils shellcheck \
-# dialog zenity kiwix-tools aria2 yt-dlp mc btop fd-find fzf tldr zoxide
-# Résumé de la transaction :
-# Installation :    102 paquets
-# La taille totale des paquets entrants est de 47 MiB. Un téléchargement de 42 MiB est nécessaire.
-# Après cette opération, 167 MiB supplémentaires seront utilisés (+150 MiB, -0 B).
-# L'opération ne fera que télécharger les paquets pour la transaction.
-
-# NB : git, wget, pciutils, iw, usbutils, compsize, libnotify, hunspell, tree, python314, podman, ffmpeg sont déjà inclus par défaut.
-# Les applications GUI ont tous la correction orthographique activée en français. Pas la peine de rajouter des dictionnaires hunspell.
