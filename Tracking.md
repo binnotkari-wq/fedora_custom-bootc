@@ -52,8 +52,14 @@ Nom de l'image adapté
 - build container Github Actions : OK
 - build container local : OK
 - build ISO Github Actions : OK
-- build ISO local :
+- build ISO local : OK
 - switch container Github Actions : OK
 - switch container local :
 - installation ISO Github Actions :
-- installation ISO local :
+- installation ISO local : OK
+
+1) vérifier les jouornaux pour détecter des erreurs
+2) vérifier la bonne prise en compte des tweaks performance
+3) vérifier que le système est propre (pas de traces de build)
+4) enlever le message d'accueil dans ptyxis, ainsi que les alias. En fait, sortir la petite customisation qui est trop volatile pour être intégrée directement dans l'OS. Cela sera fait post-install, côté utilisateur. (laisser l'historisation). Enlever donc aussi les scripts d'update (pas mature, pas vraiment intégré dans un workflow pour l'instant)
+5) enlever l'application malcontent
