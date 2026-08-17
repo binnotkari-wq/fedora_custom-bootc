@@ -51,30 +51,29 @@ rm -rf /tmp/llama-cpp.tar.gz /tmp/llama-cpp-extract
 
 PACKAGES=(
   gnome-shell-extension-dash-to-panel
-  earlyoom
-  createrepo_c
-  distrobox
-  bat
-  powertop
-  lm_sensors
-  stress-ng
-  s-tui
-  libva-utils
-  shellcheck
-  dialog
-  zenity
-  kiwix-tools
   aria2
-  yt-dlp
-  mc
+  bat
   btop
+  createrepo_c
+  dialog
+  distrobox
+  earlyoom
   fd-find
   fzf
-  tldr
   glow
+  just
+  kiwix-tools
+  libva-utils
+  lm_sensors
+  mc
+  powertop
+  s-tui
+  shellcheck
+  stress-ng
+  tldr
+  yt-dlp
+  zenity
   zoxide
-  # just
-  # tmux
   )
   
 if [ -d /run/rpm-cache ]; then

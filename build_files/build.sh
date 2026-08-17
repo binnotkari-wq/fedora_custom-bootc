@@ -10,9 +10,6 @@ cp -avf "/ctx/system_files"/. /
 ### installation des rpm, binaire de llama, repo flathub
 /ctx/softwares.sh
 
-### Intégration de brew dans L'OCI (https://github.com/ublue-os/brew)
-# /ctx/brew_(ublue).sh
-
 ### fichiers injectés dans /etc et /usr (configs, scripts, skels, services...)
 /ctx/environment.sh
 

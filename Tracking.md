@@ -6,18 +6,7 @@
 
 ./Containerfile
 
-Facutlatitf, et desactivé : ajoute de l'image locale en tant que source pour faire un build offline (cf tuto), au besoin :
-
-```
-# FROM localhost/fedora_reference-bootc:latest
-```
-
-> pointe vers l'image déjà présente dans le storage podman (chargée en local précédement via podman load)  — aucune requête réseau vers GHCR n'est faite tant que le tag existe localement.
-
-
-
-Facultatif, et desactivé : on provisionne l'OCI avec les fichiers d'installation de brew (process universal blue). Doit être spécifié après FROM "OCI source choisi" (on peut essayer de mettre ces fichiers en local. Pour être vraiment offline.)
-Privilégier une distrobox si on veut utiliser des outils CLI qui ne sont pas dans l'OCI. De plus, cela permet d'harmoniser avec nixos (brew pas installable).
+Tous les commentaires d'exemples sont supprimés.
 
 ---
 ## Nommage
@@ -61,5 +50,3 @@ Nom de l'image adapté
 1) vérifier les jouornaux pour détecter des erreurs
 2) vérifier la bonne prise en compte des tweaks performance
 3) vérifier que le système est propre (pas de traces de build)
-4) enlever le message d'accueil dans ptyxis, ainsi que les alias. En fait, sortir la petite customisation qui est trop volatile pour être intégrée directement dans l'OS. Cela sera fait post-install, côté utilisateur. (laisser l'historisation). Enlever donc aussi les scripts d'update (pas mature, pas vraiment intégré dans un workflow pour l'instant)
-5) enlever l'application malcontent
