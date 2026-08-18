@@ -17,11 +17,11 @@ flatpak remote-delete --system fedora --force || true
 # niveau des policies.
 # firefox \
 # firefox-langpacks \
+# malcontent \ à conserver, car étroitement lié au shell gnome
 dnf5 remove -y \
   gnome-tour \
   gnome-software \
   gnome-software-rpm-ostree \
-  malcontent \
   qt5-qtbase \
   qt6-qtbase
 
