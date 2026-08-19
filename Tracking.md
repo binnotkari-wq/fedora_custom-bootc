@@ -47,6 +47,30 @@ Nom de l'image adapté
 - installation ISO Github Actions :
 - installation ISO local : OK
 
-1) vérifier les jouornaux pour détecter des erreurs
 2) vérifier la bonne prise en compte des tweaks performance
 3) vérifier que le système est propre (pas de traces de build)
+
+## Analyse d'erreurs et imperfections
+
+### 18/08/2026 VM
+
+#### Build
+Une seule erreur silencieuse dans le build :
++ flatpak remote-delete --system fedora --force
+error: Remote "fedora" not found in the system installation
+
+Corrigé et commenté dans trimming.sh
+Vérifier l'absence d'erreur au prochain build.
+
+#### Boot
+
+Analyse de Claude (conversation Analyser les messages système Linux pour détecter les erreurs) d'apres le script check_system_health.sh en comparant le bootc custom avec le résultat sur Silverblue ISO d'origine :
+RAS! Mon bootc présente même moins de bruit que l'installation faite avec l'ISO standard Silverblue.
+
+#### Shutdown
+
+Analyse de Claude (conversation Analyser les messages système Linux pour détecter les erreurs) d'apres le script check_system_health.sh en comparant le bootc custom avec le résultat sur Silverblue ISO d'origine :
+RAS! Mon bootc présente même moins de bruit que l'installation faite avec l'ISO standard Silverblue.
+Un message de gnome-settings-daemon qui ne trouve pas le service orca (qui n'existe plus puisque désinstallé), sans aucune conséquence.
+
+#### Running

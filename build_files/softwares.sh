@@ -46,9 +46,8 @@ ldconfig
 rm -rf /tmp/llama-cpp.tar.gz /tmp/llama-cpp-extract
 
 
-### Packages rpm (+plugins gnome). weak_deps : on ne veut pas de paquets suggérés supplémentaires.
+### Packages rpm (+plugins gnome), repo fedora. weak_deps : on ne veut pas de paquets suggérés supplémentaires.
 ### En mode offline, on utilise le repo local des rpm pré-téléchargé
-
 PACKAGES=(
   gnome-shell-extension-dash-to-panel
   aria2
@@ -57,6 +56,7 @@ PACKAGES=(
   createrepo_c
   dialog
   distrobox
+  duf
   earlyoom
   fd-find
   fzf
@@ -66,9 +66,11 @@ PACKAGES=(
   libva-utils
   lm_sensors
   mc
+  msedit
   powertop
   s-tui
   shellcheck
+  smartmontools
   stress-ng
   tldr
   tmux
@@ -81,8 +83,21 @@ if [ -d /run/rpm-cache ]; then
     printf '[cargo-local]\nname=CARGO local cache\nbaseurl=file:///run/rpm-cache\nenabled=1\ngpgcheck=0\npriority=1\n' \
         > /etc/yum.repos.d/cargo-local.repo
     dnf5 install -y --setopt=install_weak_deps=False --disablerepo='*' --enablerepo=cargo-local "${PACKAGES[@]}"
+    rm -f /etc/yum.repos.d/cargo-local.repo
 else
     dnf5 install -y --setopt=install_weak_deps=False "${PACKAGES[@]}"
 fi
 
-rm -f /etc/yum.repos.d/cargo-local.repo
+
+### Packages rpm, repo ublue.
+### ryzenadj est absent des dépots fédora : on le récupère depuis le COPR de ublue. Le repo ublue est ensuite effacé.
+if [ -d /run/rpm-cache ]; then
+    printf '[cargo-local]\nname=CARGO local cache\nbaseurl=file:///run/rpm-cache\nenabled=1\ngpgcheck=0\npriority=1\n' \
+        > /etc/yum.repos.d/cargo-local.repo
+    dnf5 install -y --setopt=install_weak_deps=False --disablerepo='*' --enablerepo=cargo-local ryzenadj
+    rm -f /etc/yum.repos.d/cargo-local.repo
+else
+    dnf5 -y copr enable ublue-os/bazzite
+    dnf5 install -y --setopt=install_weak_deps=False ryzenadj
+    dnf5 -y copr disable ublue-os/bazzite
+fi
